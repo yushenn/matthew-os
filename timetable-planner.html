@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SUSS Timetable Planner case study | Matthew Tan</title>
+<meta name="description" content="How I built a web app that reads SUSS timetable PDFs in the browser, checks every session date for clashes and suggests clash-free timetables.">
+<meta property="og:title" content="SUSS Timetable Planner case study | Matthew Tan">
+<meta property="og:description" content="Reads 300+ page timetable PDFs in the browser and suggests clash-free timetables.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://yushenn.github.io/matthew-os/images/planner-week.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232447C8'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='26' fill='white' text-anchor='middle'%3EMT%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="mark" href="./"><i aria-hidden="true">MT</i>Matthew Tan</a>
+    <a class="back" href="./#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>All projects</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Case study · Personal project</div>
+    <h1>SUSS Timetable Planner: <span class="grad">no more clashes</span></h1>
+    <p class="lead">Course registration gives you a 300+ page PDF. I built a web app that reads it for you, checks every real session date for clashes, and suggests timetables that work.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Solo: requirements, build, testing</dd></div>
+      <div><dt>Timeline</dt><dd>2026</dd></div>
+      <div><dt>Stack</dt><dd>HTML, CSS, JavaScript, PDF.js</dd></div>
+      <div><dt>Data</dt><dd>Parsed in the browser, nothing uploaded</dd></div>
+    </dl>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://yushenn.github.io/eCR/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
+      <a class="btn" href="https://github.com/yushenn/eCR" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
+    </div>
+    <figure class="wide-shot reveal">
+      <img src="images/planner-week.jpg" alt="Weekly calendar in the planner showing four courses with no clashes" width="800" height="506" loading="lazy">
+      <figcaption>A week in the planner, using the built-in sample data: four courses, no clashes across the whole semester.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">01</span><h2>The problem</h2></div>
+    <div class="prose">
+      <p>Checking a timetable by hand is slow and easy to get wrong, because the weekly slot isn't the whole story:</p>
+      <ul>
+        <li>Classes alternate between 2-hour and 3-hour weeks.</li>
+        <li>There are one-off sessions and written exams on their own dates.</li>
+        <li>Some courses have overseas trips during the break, which can clash with special-semester classes.</li>
+        <li>Some courses span two semesters.</li>
+      </ul>
+      <p>I wanted to compare a few backup timetables side by side before registration opened, and be sure none of them clashed on any date.</p>
+    </div>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">02</span><h2>What I built</h2></div>
+    <div class="prose">
+      <ul>
+        <li><b>Reads the official PDFs</b> (course schedule, curriculum plan, study plan, overseas info sheet) and recognises each one automatically.</li>
+        <li><b>Checks clashes on every date</b>, including exams and trip days, shown on a weekly calendar and a week-by-week strip.</li>
+        <li><b>Suggests timetables</b> with options like daytime classes only, morning starts only, or keeping certain weekdays free, ranked by fewest campus days.</li>
+        <li><b>Compares backup plans</b> in one table: clashes, campus days, credit units and trips.</li>
+        <li><b>Tracks progress</b>: which SUSS Core courses you still need, prerequisite warnings, and courses running for the last time.</li>
+        <li><b>Exports</b> a plan to your calendar (.ics) and backs up all plans (.json).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">03</span><h2>How it works</h2></div>
+    <div class="cards">
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+        <h3>Reading tables from a PDF</h3>
+        <p>A PDF has no real "table", just text placed at coordinates. The parser groups text into rows by vertical position, then matches the course code, class group, date, times and campus. Wrapped text like "WRITTEN EXAM" is attached to the nearest row.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v18H3zM3 9h18M9 3v18"/></svg></span>
+        <h3>Finding columns from the header</h3>
+        <p>For the curriculum plan, the parser finds each column's position from the header rows, so cells that wrap over several lines (course names, prerequisites, remarks) end up in the right column.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 8l3.5 8M16.5 8 13 16"/></svg></span>
+        <h3>Searching for clash-free timetables</h3>
+        <p>The suggestion engine is a depth-first search with pruning. It places one class group at a time and abandons a branch as soon as a group clashes with what's already placed, so it never wastes time on combinations that can't work.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span>
+        <h3>Checking clashes by date, not weekday</h3>
+        <p>Each check uses a per-date map of occupied times plus blocked trip days. That's what catches an exam or a one-off session that a weekly view would miss.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">04</span><h2>Key decisions</h2></div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>Parse the PDFs in the browser instead of on a server.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>Students' documents never leave their device, there's no server to run or pay for, and the whole app can be hosted for free on GitHub Pages.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>Ship sample data and no SUSS documents in the repository.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>Anyone can try the app in one click, while the official PDFs stay with SUSS. Users upload their own copies.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>Test against the real SUSS timetable.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>Edge cases like alternating session lengths and trips clashing with special-semester classes only show up in real data, so I checked the results against the actual schedule.</p></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">05</span><h2>What I'd do next</h2></div>
+    <ul class="next">
+      <li><b>Parser tests</b><span>Automated tests on sample PDFs so a format change is caught straight away.</span></li>
+      <li><b>Share a plan</b><span>Send a plan to a friend with a link, to line up classes together.</span></li>
+      <li><b>User feedback</b><span>Share it with coursemates during registration and see where they get stuck.</span></li>
+    </ul>
+  </section>
+
+  <section class="cta reveal">
+    <div><h2>Try it yourself</h2><p>Click "Try with sample data". No PDFs needed.</p></div>
+    <div class="actions" style="margin:0">
+      <a class="btn btn-primary" href="https://yushenn.github.io/eCR/" target="_blank" rel="noopener">Open the planner</a>
+      <a class="btn" href="repwise.html">Previous case study</a>
+    </div>
+  </section>
+</main>
+
+<footer><a href="./">← Back to portfolio</a> · © <span id="yr">2026</span> Matthew Tan</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  if ('IntersectionObserver' in window) {
+    const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: .05 });
+    document.querySelectorAll('.reveal').forEach(el => rv.observe(el));
+  } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+</script>
+</body>
+</html>

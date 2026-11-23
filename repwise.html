@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repwise case study | Matthew Tan</title>
+<meta name="description" content="How I designed and built Repwise, an offline workout tracker with a built-in coach, progress charts and automatic personal-record detection.">
+<meta property="og:title" content="Repwise case study | Matthew Tan">
+<meta property="og:description" content="An offline workout tracker with a built-in coach, progress charts and automatic PR detection.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://yushenn.github.io/matthew-os/images/repwise-home.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232447C8'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='26' fill='white' text-anchor='middle'%3EMT%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="case.css">
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="mark" href="./"><i aria-hidden="true">MT</i>Matthew Tan</a>
+    <a class="back" href="./#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>All projects</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Case study · Personal project</div>
+    <h1>Repwise: a workout tracker that <span class="grad">coaches you</span></h1>
+    <p class="lead">Most trackers just record what you lifted. I wanted one that also tells me what to do next session: how heavy to go, when to add weight, and whether I'm actually getting stronger.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Solo: design, build, testing</dd></div>
+      <div><dt>Timeline</dt><dd>2026 – Present</dd></div>
+      <div><dt>Stack</dt><dd>HTML, CSS, JavaScript, SVG</dd></div>
+      <div><dt>Platform</dt><dd>Installable web app, works offline</dd></div>
+    </dl>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
+      <a class="btn" href="https://github.com/yushenn/Repwise" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
+    </div>
+
+    <div class="gallery reveal">
+      <figure><img class="shot" src="images/repwise-welcome.jpg" alt="Repwise welcome screen: Train smarter. Lift more." width="390" height="844" loading="lazy"><figcaption>Welcome and setup</figcaption></figure>
+      <figure><img class="shot" src="images/repwise-home.jpg" alt="Repwise home screen showing the next workout, weekly tracker and stats" width="390" height="844" loading="lazy"><figcaption>Home: what's next</figcaption></figure>
+      <figure><img class="shot" src="images/repwise-workout.jpg" alt="Repwise workout logger with sets, reps, weights and rest timer" width="390" height="844" loading="lazy"><figcaption>Workout logger</figcaption></figure>
+      <figure><img class="shot" src="images/repwise-progress.jpg" alt="Repwise progress screen with a 12-week calendar and weekly volume chart" width="390" height="844" loading="lazy"><figcaption>Progress and trends</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">01</span><h2>The problem</h2></div>
+    <div class="prose">
+      <p>I've trained for years, coached 100+ members as Head Trainer of NYP Urban Strength, and competed in powerlifting. The thing that makes people progress is simple: <b>progressive overload</b>, lifting a little more over time. But most people forget what they lifted last week, guess their weights, and can't tell whether they're improving.</p>
+      <p>I wanted an app that remembers for you and applies the same rules a coach would. It also had to be quick to use between sets, work in a gym with bad signal, and not need an account.</p>
+    </div>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">02</span><h2>What I built</h2></div>
+    <div class="prose">
+      <ul>
+        <li><b>Two-step setup</b> that picks a training split from your goal, experience and the days you can train, and queues up day 1.</li>
+        <li><b>Workout logger</b> with weight and rep steppers, an automatic rest timer (sound and vibration), and last session's numbers filled in.</li>
+        <li><b>Coach tips</b> after each exercise: when to add weight, when to add a rep, or when to move up to a harder bodyweight variation.</li>
+        <li><b>Program that advances itself.</b> Finish a day and the next one is ready, pre-filled with what you just lifted.</li>
+        <li><b>Progress tab</b>: a 12-week consistency calendar, weekly volume, a strength trend per exercise, bodyweight tracking and personal records.</li>
+        <li><b>Learning content</b>: 91 exercises with form cues, 8 training splits and an evidence-graded supplement guide.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">03</span><h2>Key decisions</h2></div>
+    <div class="cards">
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+        <h3>No framework, one file</h3>
+        <p>The whole app is plain JavaScript in a single HTML file. All app data lives in one state object, and a single <code>render()</code> function redraws the screen from it.</p>
+        <p class="tradeoff"><b>Trade-off:</b> no build step and it loads instantly, but I had to handle things a framework would do for me, like keeping scroll position after a redraw.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <h3>Local-first, no account</h3>
+        <p>Workouts are saved in the browser's local storage, and a service worker caches the app so it works offline. Users can export and import a JSON backup.</p>
+        <p class="tradeoff"><b>Trade-off:</b> private and fast, but data doesn't sync between devices yet.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17l6-6 4 4 6-7M14 8h6v6"/></svg></span>
+        <h3>Coaching rules as code</h3>
+        <p>I turned the "double progression" method into logic: work in a rep range, and once every set reaches the top of it, add 2.5 kg (5 kg on big leg lifts) and drop back to the bottom of the range.</p>
+        <p class="tradeoff"><b>Trade-off:</b> simple and predictable, but it doesn't adjust for a bad day or a deload yet.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <h3>Hand-drawn SVG charts</h3>
+        <p>Instead of a charting library, the bar chart, line charts and calendar are drawn as SVG directly from the data.</p>
+        <p class="tradeoff"><b>Trade-off:</b> nothing extra to download and it works offline, but I wrote the scaling and labels myself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">04</span><h2>Comparing different sets fairly</h2></div>
+    <div class="prose">
+      <p>To spot a personal record, the app needs to compare sets like <b>100 kg × 5</b> and <b>105 kg × 3</b>. Which is better? I used the Epley formula to estimate a one-rep max for every set, so any two sets can be compared on one number:</p>
+    </div>
+    <div class="formula">est. 1RM = weight × (1 + reps ÷ 30)<br><span class="c">100 kg × 5 → 116.7 kg &nbsp;·&nbsp; 105 kg × 3 → 115.5 kg &nbsp;·&nbsp; so 100 × 5 is the stronger set</span></div>
+    <div class="prose" style="margin-top:1rem">
+      <p>When you finish a workout, each exercise's best set is compared with your history. If it beats your previous best, it shows up as a new record in the workout summary. For bodyweight moves like pull-ups, where weight doesn't apply, the app compares reps instead.</p>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">05</span><h2>Challenges</h2></div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Problem</span><p>After an update, people who had installed the app on their phone kept seeing the old version, because the service worker served the cached copy.</p></div>
+      <div class="s"><span class="lbl">Solution</span><p>I version the cache name and delete old caches when the new service worker activates, so each release replaces the previous one cleanly.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Problem</span><p>Weekly stats and streaks were fragile: "subtract 7 days" can land on the wrong week around daylight-saving changes, and weeks should start on Monday.</p></div>
+      <div class="s"><span class="lbl">Solution</span><p>I wrote one function that finds the Monday of any week, and step back a week by asking for the Monday of a date a few days earlier, instead of subtracting fixed milliseconds.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Problem</span><p>A brand-new user, or someone watching a demo, sees empty charts, which makes the app hard to understand.</p></div>
+      <div class="s"><span class="lbl">Solution</span><p>I added a demo mode that generates 10 weeks of realistic training (weights rising about 2% a week, the odd missed session) so every screen can be shown in seconds.</p></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">06</span><h2>What I'd do next</h2></div>
+    <ul class="next">
+      <li><b>Accounts and cloud sync</b><span>A small API and database so workouts follow you across devices.</span></li>
+      <li><b>Automated tests</b><span>Unit tests for the progression rules, PR detection and date maths.</span></li>
+      <li><b>User feedback</b><span>Put it in front of gym members and track which features they use.</span></li>
+    </ul>
+  </section>
+
+  <section class="cta reveal">
+    <div><h2>Try it yourself</h2><p>Tap "Explore with demo data" on the welcome screen.</p></div>
+    <div class="actions" style="margin:0">
+      <a class="btn btn-primary" href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener">Open Repwise</a>
+      <a class="btn" href="timetable-planner.html">Next case study</a>
+    </div>
+  </section>
+</main>
+
+<footer><a href="./">← Back to portfolio</a> · © <span id="yr">2026</span> Matthew Tan</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  if ('IntersectionObserver' in window) {
+    const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: .05 });
+    document.querySelectorAll('.reveal').forEach(el => rv.observe(el));
+  } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+</script>
+</body>
+</html>
