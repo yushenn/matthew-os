@@ -162,6 +162,11 @@ ul{margin:0}
 .card.wide{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}
 .card.wide > div{display:flex;flex-direction:column;gap:.55rem}
 .card.wide ul{margin-top:.2rem}
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.5rem 0 .1rem}
+.stack div{padding:.6rem .75rem;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.stack dt{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.stack dd{margin:.15rem 0 0;font-size:.86rem;font-weight:600;line-height:1.35}
+@media (max-width:520px){.stack{grid-template-columns:1fr}}
 .featured .info{display:flex;flex-direction:column;gap:.6rem}
 .featured h3{font-size:clamp(1.6rem,3.2vw,2.1rem);font-weight:800;letter-spacing:-.02em}
 .feature-label{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet)}
@@ -368,18 +373,21 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
       <li class="card featured reveal">
         <div class="info">
           <span class="feature-label">Featured project</span>
-          <h3>Repwise<span class="pill">In testing</span></h3>
+          <h3>Repwise<span class="pill live">Live</span></h3>
           <span class="card-when">Personal, 2026 – Present</span>
           <p>A mobile-first workout tracker I built to keep all my training data in one place.</p>
           <ul>
             <li>Log sets, reps and weights, with a rest timer between sets</li>
-            <li>A short setup builds a training plan from your goal, experience and schedule, then moves to the next day after each workout</li>
+            <li>Builds a training plan from your goal and schedule, and tells you when to add weight or reps</li>
             <li>Progress charts, a 12-week consistency calendar and automatic personal-record detection</li>
-            <li>Library of 90+ exercises with form cues</li>
-            <li>Training splits, progressive overload plans and a supplement guide</li>
-            <li>Works offline and installs on a phone</li>
-            <li>Optional accounts and cloud sync: a Flask and MongoDB API with hashed passwords, token sign-in and conflict-safe syncing between devices, covered by 24 automated tests</li>
+            <li>90+ exercises with form cues, training splits and a supplement guide</li>
+            <li>Works offline, with optional accounts that sync workouts between your phone and laptop</li>
           </ul>
+          <dl class="stack">
+            <div><dt>Front end</dt><dd>JavaScript, installable PWA</dd></div>
+            <div><dt>Back end</dt><dd>Flask API, MongoDB</dd></div>
+            <div><dt>Quality</dt><dd>24 tests, run on every push</dd></div>
+          </dl>
           <div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">MongoDB</span><span class="tag">REST API</span><span class="tag">PWA</span></div>
           <div class="row-links">
             <a href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>

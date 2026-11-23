@@ -116,6 +116,42 @@
     <div class="section-head"><span class="num">05</span><h2>Adding a backend: accounts and sync</h2></div>
     <div class="prose">
       <p>To let workouts follow you between devices, I built a small API in <b>Python (Flask)</b> with a <b>MongoDB</b> database, deployed on Render. The app stays local-first: signing in is optional, and everything still works offline.</p>
+    </div>
+    <div class="arch">
+      <figure class="arch-diagram">
+        <svg viewBox="0 0 360 430" role="img" aria-labelledby="archTitle archDesc">
+          <title id="archTitle">How Repwise sync works</title>
+          <desc id="archDesc">The app on a phone or laptop saves to the device first, then syncs over HTTPS with a Flask API on Render, which stores data in MongoDB Atlas.</desc>
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" style="fill:var(--blue)"/></marker></defs>
+          <g font-family="Instrument Sans, system-ui, sans-serif">
+            <rect x="20" y="10" width="320" height="100" rx="16" style="fill:var(--surface);stroke:var(--line)"/>
+            <text x="40" y="40" font-size="12" font-weight="700" letter-spacing="1.2" style="fill:var(--blue)">PHONE / LAPTOP</text>
+            <text x="40" y="64" font-size="17" font-weight="700" style="fill:var(--ink)">Repwise app (JavaScript)</text>
+            <text x="40" y="88" font-size="13" style="fill:var(--muted)">Saves to the device first · works offline</text>
+
+            <line x1="150" y1="118" x2="150" y2="168" stroke-width="2.5" marker-end="url(#ah)" style="stroke:var(--blue)"/>
+            <line x1="210" y1="168" x2="210" y2="118" stroke-width="2.5" marker-end="url(#ah)" style="stroke:var(--blue)"/>
+            <text x="222" y="140" font-size="12" style="fill:var(--muted)">HTTPS + sign-in token</text>
+            <text x="222" y="156" font-size="12" style="fill:var(--muted)">data + version number</text>
+
+            <rect x="20" y="176" width="320" height="120" rx="16" style="fill:var(--surface);stroke:var(--blue);stroke-width:1.5"/>
+            <text x="40" y="206" font-size="12" font-weight="700" letter-spacing="1.2" style="fill:var(--blue)">RENDER</text>
+            <text x="40" y="230" font-size="17" font-weight="700" style="fill:var(--ink)">Sync API (Python, Flask)</text>
+            <text x="40" y="254" font-size="13" style="fill:var(--muted)">Hashed passwords · rate limiting</text>
+            <text x="40" y="276" font-size="13" style="fill:var(--muted)">409 Conflict if another device saved first</text>
+
+            <line x1="180" y1="304" x2="180" y2="344" stroke-width="2.5" marker-end="url(#ah)" marker-start="url(#ah)" style="stroke:var(--blue)"/>
+
+            <rect x="20" y="352" width="320" height="70" rx="16" style="fill:var(--surface);stroke:var(--line)"/>
+            <text x="40" y="382" font-size="12" font-weight="700" letter-spacing="1.2" style="fill:var(--blue)">MONGODB ATLAS</text>
+            <text x="40" y="406" font-size="15" font-weight="700" style="fill:var(--ink)">users · one synced copy per user</text>
+          </g>
+        </svg>
+        <figcaption>How the pieces fit together</figcaption>
+      </figure>
+      <figure class="arch-shot"><img class="shot" src="images/repwise-sync.jpg" alt="Repwise Profile screen with the optional Sync across devices sign-in card" width="390" height="844" loading="lazy"><figcaption>Optional sign-in, on the Profile tab</figcaption></figure>
+    </div>
+    <div class="prose" style="margin-top:1.4rem">
       <ul>
         <li><b>Security:</b> passwords are hashed (scrypt), sign-in returns a signed token (JWT) that expires after 30 days, repeated failed logins are rate limited, and only the Repwise website is allowed to call the API.</li>
         <li><b>Two devices saving at once:</b> every save says which version it was based on. If another device saved first, the server refuses with <code>409 Conflict</code> and sends back the latest copy. The app merges the two and tries again.</li>
