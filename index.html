@@ -159,6 +159,9 @@ ul{margin:0}
 .card li::marker{color:var(--blue)}
 .card .spacer{flex:1}
 .featured{grid-column:1 / -1;display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:2rem;overflow:hidden;background:linear-gradient(140deg,color-mix(in srgb,var(--blue) 7%,var(--surface)) 0%,var(--surface) 55%)}
+.card.wide{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}
+.card.wide > div{display:flex;flex-direction:column;gap:.55rem}
+.card.wide ul{margin-top:.2rem}
 .featured .info{display:flex;flex-direction:column;gap:.6rem}
 .featured h3{font-size:clamp(1.6rem,3.2vw,2.1rem);font-weight:800;letter-spacing:-.02em}
 .feature-label{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet)}
@@ -265,7 +268,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
   .stop-what{margin-top:0}
   .stop-where{grid-column:2}
   .strengths{grid-template-columns:1fr}
-  .projects,.edu,.skills{grid-template-columns:1fr}
+  .projects,.edu,.skills,.card.wide{grid-template-columns:1fr}
   .featured{padding:1.5rem}
   .row-when{white-space:normal}
   .foot{justify-content:center;text-align:center}
@@ -370,10 +373,13 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
           <p>A mobile-first workout tracker I built to keep all my training data in one place, using AI-assisted development.</p>
           <ul>
             <li>Log sets, reps and weights, with a rest timer between sets</li>
+            <li>A short setup builds a training plan from your goal, experience and schedule, then moves to the next day after each workout</li>
+            <li>Progress charts, a 12-week consistency calendar and automatic personal-record detection</li>
             <li>Library of 90+ exercises with form cues</li>
             <li>Training splits, progressive overload plans and a supplement guide</li>
+            <li>Works offline and installs on a phone; all data stays on the device</li>
           </ul>
-          <div class="tags"><span class="tag">JavaScript</span><span class="tag">GitHub Pages</span></div>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">SVG charts</span><span class="tag">PWA</span><span class="tag">GitHub Pages</span></div>
           <div class="row-links">
             <a href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
             <a href="https://github.com/yushenn/Repwise" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
@@ -383,6 +389,24 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
           <div class="phone"><iframe data-src="https://yushenn.github.io/Repwise/" title="Repwise live app preview" loading="lazy"></iframe></div>
           <p class="phone-cap">Live preview. Try it right here.</p>
         </div>
+      </li>
+      <li class="card wide reveal">
+        <div>
+          <h3>SUSS Timetable Planner</h3>
+          <span class="card-when">Personal, 2026</span>
+          <p>A web app that reads the official SUSS timetable PDFs in the browser and checks a semester plan for clashes on every real session date, including exams and overseas trips.</p>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">PDF.js</span><span class="tag">Search algorithm</span><span class="tag">GitHub Pages</span></div>
+          <div class="row-links">
+            <a href="https://yushenn.github.io/eCR/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
+            <a href="https://github.com/yushenn/eCR" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
+          </div>
+        </div>
+        <ul>
+          <li>Reads 300+ page timetable PDFs with PDF.js, matching course codes, class groups, dates and times by their position on the page</li>
+          <li>Suggests clash-free timetables with a depth-first search, ranked by fewest campus days, with options such as keeping weekdays free</li>
+          <li>Compares backup plans side by side, tracks SUSS Core progress and prerequisites, and exports a plan to your calendar (.ics)</li>
+          <li>Nothing is uploaded: PDFs are parsed and plans are saved in the browser</li>
+        </ul>
       </li>
       <li class="card reveal">
         <h3>Online Supermarket Web App</h3>
