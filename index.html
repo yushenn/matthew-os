@@ -410,6 +410,24 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
           <li>Nothing is uploaded: PDFs are parsed and plans are saved in the browser</li>
         </ul>
       </li>
+      <li class="card wide reveal">
+        <div>
+          <h3>HDB Resale Insights<span class="pill">New</span></h3>
+          <span class="card-when">Personal, 2026</span>
+          <p>An analysis of every HDB resale transaction since 2017 (245,000+ sales) that finds what really drives prices, with an interactive dashboard and a fair-price estimator.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Regression</span><span class="tag">Chart.js</span></div>
+          <div class="row-links">
+            <a href="https://yushenn.github.io/hdb-resale-insights/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open dashboard</a>
+            <a href="https://github.com/yushenn/hdb-resale-insights" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
+          </div>
+        </div>
+        <ul>
+          <li>Cleaned the government dataset with pandas and wrote the analysis in SQL, using window functions to calculate medians</li>
+          <li>Built a regression model that explains 91% of price variation, tested on 49,000 sales it had never seen</li>
+          <li>Showed that the raw "high-floor premium" is mostly a location effect: like for like, each floor adds about 0.8%</li>
+          <li>Turned the model into a fair-price estimator anyone can use in the browser</li>
+        </ul>
+      </li>
       <li class="card reveal">
         <h3>Online Supermarket Web App</h3>
         <span class="card-when">Web Application Development, SUSS, Jul – Oct 2026</span>
