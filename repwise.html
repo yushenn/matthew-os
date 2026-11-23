@@ -32,8 +32,8 @@
     <dl class="meta">
       <div><dt>Role</dt><dd>Solo: design, build, testing</dd></div>
       <div><dt>Timeline</dt><dd>2026 – Present</dd></div>
-      <div><dt>Stack</dt><dd>HTML, CSS, JavaScript, SVG</dd></div>
-      <div><dt>Platform</dt><dd>Installable web app, works offline</dd></div>
+      <div><dt>Stack</dt><dd>JavaScript, Python (Flask), MongoDB</dd></div>
+      <div><dt>Platform</dt><dd>Offline web app with optional cloud sync</dd></div>
     </dl>
     <div class="actions">
       <a class="btn btn-primary" href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
@@ -66,6 +66,7 @@
         <li><b>Program that advances itself.</b> Finish a day and the next one is ready, pre-filled with what you just lifted.</li>
         <li><b>Progress tab</b>: a 12-week consistency calendar, weekly volume, a strength trend per exercise, bodyweight tracking and personal records.</li>
         <li><b>Learning content</b>: 91 exercises with form cues, 8 training splits and an evidence-graded supplement guide.</li>
+        <li><b>Optional account and cloud sync</b>, so workouts follow you between phone and laptop, while the app keeps working offline.</li>
       </ul>
     </div>
   </section>
@@ -83,7 +84,7 @@
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
         <h3>Local-first, no account</h3>
         <p>Workouts are saved in the browser's local storage, and a service worker caches the app so it works offline. Users can export and import a JSON backup.</p>
-        <p class="tradeoff"><b>Trade-off:</b> private and fast, but data doesn't sync between devices yet.</p>
+        <p class="tradeoff"><b>Trade-off:</b> private and fast with no account. I later added optional sync on top, without changing that default.</p>
       </div>
       <div class="card">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17l6-6 4 4 6-7M14 8h6v6"/></svg></span>
@@ -111,8 +112,21 @@
     </div>
   </section>
 
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">05</span><h2>Adding a backend: accounts and sync</h2></div>
+    <div class="prose">
+      <p>To let workouts follow you between devices, I built a small API in <b>Python (Flask)</b> with a <b>MongoDB</b> database, deployed on Render. The app stays local-first: signing in is optional, and everything still works offline.</p>
+      <ul>
+        <li><b>Security:</b> passwords are hashed (scrypt), sign-in returns a signed token (JWT) that expires after 30 days, repeated failed logins are rate limited, and only the Repwise website is allowed to call the API.</li>
+        <li><b>Two devices saving at once:</b> every save says which version it was based on. If another device saved first, the server refuses with <code>409 Conflict</code> and sends back the latest copy. The app merges the two and tries again.</li>
+        <li><b>Merging without losing anything:</b> workouts are combined by their timestamp, deleted workouts stay deleted on every device, bodyweight keeps the latest entry per day, and the profile comes from whichever device changed it last.</li>
+        <li><b>Tests and CI:</b> 24 automated tests (pytest, with an in-memory MongoDB) cover sign-up, sign-in, expired and forged tokens, rate limiting, users not seeing each other's data, conflicts and bad input. They run on every push with GitHub Actions.</li>
+      </ul>
+    </div>
+  </section>
+
   <section class="section reveal">
-    <div class="section-head"><span class="num">05</span><h2>Challenges</h2></div>
+    <div class="section-head"><span class="num">06</span><h2>Challenges</h2></div>
     <div class="challenge">
       <div class="p"><span class="lbl">Problem</span><p>After an update, people who had installed the app on their phone kept seeing the old version, because the service worker served the cached copy.</p></div>
       <div class="s"><span class="lbl">Solution</span><p>I version the cache name and delete old caches when the new service worker activates, so each release replaces the previous one cleanly.</p></div>
@@ -122,16 +136,20 @@
       <div class="s"><span class="lbl">Solution</span><p>I wrote one function that finds the Monday of any week, and step back a week by asking for the Monday of a date a few days earlier, instead of subtracting fixed milliseconds.</p></div>
     </div>
     <div class="challenge">
+      <div class="p"><span class="lbl">Problem</span><p>My first deploy crashed: the database setting was missing, and the server quietly fell back to the in-memory test database, which isn't installed in production.</p></div>
+      <div class="s"><span class="lbl">Solution</span><p>The server now refuses to start in production without a database or a strong secret, and logs a plain explanation of what to fix. I added tests for both cases.</p></div>
+    </div>
+    <div class="challenge">
       <div class="p"><span class="lbl">Problem</span><p>A brand-new user, or someone watching a demo, sees empty charts, which makes the app hard to understand.</p></div>
       <div class="s"><span class="lbl">Solution</span><p>I added a demo mode that generates 10 weeks of realistic training (weights rising about 2% a week, the odd missed session) so every screen can be shown in seconds.</p></div>
     </div>
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">06</span><h2>What I'd do next</h2></div>
+    <div class="section-head"><span class="num">07</span><h2>What I'd do next</h2></div>
     <ul class="next">
-      <li><b>Accounts and cloud sync</b><span>A small API and database so workouts follow you across devices.</span></li>
-      <li><b>Automated tests</b><span>Unit tests for the progression rules, PR detection and date maths.</span></li>
+      <li><b>Password reset and account deletion</b><span>Email-based reset, and a way to delete your account and data.</span></li>
+      <li><b>Front-end tests</b><span>Unit tests for the progression rules, PR detection, sync merging and date maths.</span></li>
       <li><b>User feedback</b><span>Put it in front of gym members and track which features they use.</span></li>
     </ul>
   </section>
