@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BTO Explorer case study | Matthew Tan</title>
+<meta name="description" content="How I built BTO Explorer, an independent map that helps young couples in Singapore compare HDB towns and every HDB block using seven official open datasets.">
+<meta property="og:title" content="BTO Explorer case study | Matthew Tan">
+<meta property="og:description" content="An independent map for young couples: HDB towns, 10,800+ blocks, BTO launch prices, MRT and food nearby.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://yushenn.github.io/matthew-os/images/bto-block.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232447C8'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='26' fill='white' text-anchor='middle'%3EMT%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}if(!d.getAttribute('data-theme'))d.setAttribute('data-theme','dark');})();</script>
+<link rel="stylesheet" href="case.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hitech.css">
+<script src="hitech.js" defer></script>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="mark" href="./"><i aria-hidden="true">MT</i>Matthew Tan</a>
+    <a class="back" href="./#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>All projects</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Case study · Personal project</div>
+    <h1>BTO Explorer: helping couples find a home they can <span class="grad">afford</span></h1>
+    <p class="lead">Buying a first home means comparing towns, BTO launches and resale prices that are spread across different government sites. I built an independent map that brings it together, right down to every HDB block.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Solo: research, data, design, build</dd></div>
+      <div><dt>Timeline</dt><dd>2026</dd></div>
+      <div><dt>Stack</dt><dd>Python, pandas, SQL, Shapely, Leaflet</dd></div>
+      <div><dt>Data</dt><dd>7 official datasets: HDB, URA, LTA, NEA</dd></div>
+    </dl>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live site</a>
+      <a class="btn" href="https://github.com/yushenn/bto-explorer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
+    </div>
+    <figure class="wide-shot reveal">
+      <img src="images/bto-block.jpg" alt="BTO Explorer zoomed into Woodlands, with house icons for each block and a popup for Blk 780E showing its completion year and resale prices" width="800" height="475" loading="lazy">
+      <figcaption>Every HDB block is a house icon. Click one for its completion year, size, lease left and recent resale prices.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">01</span><h2>The problem</h2></div>
+    <div class="prose">
+      <p>When young couples start looking for their first home, the same questions come up: which towns can we afford? What did BTO flats there cost? What do resale flats really go for? How old is that block, and is there an MRT nearby?</p>
+      <p>The answers exist, but they're spread across different datasets and sites. I wanted one place to compare towns quickly, then zoom in to the actual blocks.</p>
+      <p>The project started as a resale price analysis. I turned it into a tool that people can actually use.</p>
+    </div>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">02</span><h2>What I built</h2></div>
+    <div class="prose">
+      <ul>
+        <li><b>A town map ranked from most to least expensive,</b> by resale price per m² over the last 12 months.</li>
+        <li><b>A budget mode:</b> pick a flat type and budget to see where a typical resale flat fits, and where only a recent BTO launch fits.</li>
+        <li><b>Every HDB block on the map.</b> 10,802 blocks appear as house icons, coloured by age. Click one for its completion year, storeys, homes, lease left, flat types and resale prices from the last 24 months.</li>
+        <li><b>A town panel</b> with BTO launch prices (including after grants) since FY2008, the gap between BTO and resale prices, MRT/LRT stations and hawker centres.</li>
+      </ul>
+    </div>
+    <figure class="wide-shot">
+      <img src="images/bto-budget.jpg" alt="Budget mode: at S$500k for a 4-room flat, towns where only a recent BTO launch fits are shaded amber" width="800" height="600" loading="lazy">
+      <figcaption>Budget mode at S$500k for a 4-room flat: in the amber towns, only a recent BTO launch fits.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">03</span><h2>How it works</h2></div>
+    <div class="cards">
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
+        <h3>Prices in SQL</h3>
+        <p>245,000+ resale sales are cleaned with pandas, then loaded into SQLite. Medians by town and flat type are calculated with window functions, since SQLite has no <code>MEDIAN()</code>.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3ZM9 3v15M15 6v15"/></svg></span>
+        <h3>Geography with Shapely</h3>
+        <p>Town boundaries are simplified so the map loads quickly. 613 MRT and LRT exits are grouped into 188 stations, and stations, hawker centres and blocks are placed inside their towns.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V10l9-6 9 6v11h-6v-6H9v6z"/></svg></span>
+        <h3>Blocks loaded per town</h3>
+        <p>All the block data adds up to about 3 MB, so each town has its own small file. It only loads when you open that town, so the first page load stays light.</p>
+      </div>
+      <div class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span>
+        <h3>Reproducible pipeline</h3>
+        <p>Two Python scripts download all seven datasets from the data.gov.sg API and rebuild every file the site uses, so the data can be refreshed with two commands.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section narrow reveal">
+    <div class="section-head"><span class="num">04</span><h2>The hardest part: data with no shared ID</h2></div>
+    <div class="prose">
+      <p>HDB publishes block details (street name, completion year, storeys, homes) and building locations as two separate datasets. They don't share an ID: the locations only have a <b>street code</b> like <code>YIA06H</code>, while the details use a <b>street name</b> like <code>YISHUN AVE 6</code>.</p>
+      <p>My solution was to compare which block numbers appear on each. A street code and a street name that list mostly the same block numbers, in the same town, must be the same street.</p>
+    </div>
+    <div class="formula">street code  YIA06H  ↔  street name  YISHUN AVE 6<br><span class="c">same town · 84% of block numbers in common → same street</span></div>
+    <div class="prose" style="margin-top:1rem">
+      <ul>
+        <li><b>A mistake I caught:</b> my first version also compared the numbers inside the codes, which matched some streets to the wrong town. Limiting matches to the same town fixed it.</li>
+        <li><b>Result:</b> 10,802 of 10,817 residential blocks placed on the map.</li>
+        <li><b>Checking it:</b> I looked up 40 random blocks by postal code on OneMap, the government's official map. All 40 matched; one was just written differently ("GDN" vs "GARDEN").</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">05</span><h2>Key decisions</h2></div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>Don't show upcoming BTO projects from guesswork.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>The only "under construction" dataset turned out to be from 2018. Rather than show out-of-date projects, the site links to HDB's official Flat Portal for upcoming launches.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>Only count recent BTO launches (FY2020 onwards) in budget mode.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>HDB's price table covers different towns each year. A 2016 launch price would make a town look far more affordable than it is today.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>A clean public-service look, but not HDB's branding.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>It should feel trustworthy and familiar without anyone mistaking it for an official HDB site, so every page says it's independent.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Decision</span><p>Explain the limits on the page itself.</p></div>
+      <div class="s"><span class="lbl">Why</span><p>Lease left is an estimate, "after grants" uses the grants HDB published at the time, and new blocks have no resales because of the 5-year minimum occupation period. Users see all of this where it matters.</p></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">06</span><h2>What I'd do next</h2></div>
+    <ul class="next">
+      <li><b>Distance to MRT</b><span>Show the walking distance from each block to its nearest station.</span></li>
+      <li><b>More amenities</b><span>Add layers for schools, clinics, parks and supermarkets.</span></li>
+      <li><b>Automatic updates</b><span>Refresh the data every month with GitHub Actions.</span></li>
+    </ul>
+  </section>
+
+  <section class="cta reveal">
+    <div><h2>Try it yourself</h2><p>Pick a town, then click any block on the map.</p></div>
+    <div class="actions" style="margin:0">
+      <a class="btn btn-primary" href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener">Open BTO Explorer</a>
+      <a class="btn" href="repwise.html">Repwise case study</a>
+    </div>
+  </section>
+</main>
+
+<footer><a href="./">← Back to portfolio</a> · © <span id="yr">2026</span> Matthew Tan</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  if ('IntersectionObserver' in window) {
+    const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: .05 });
+    document.querySelectorAll('.reveal').forEach(el => rv.observe(el));
+  } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+</script>
+</body>
+</html>
