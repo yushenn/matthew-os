@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BTO Explorer case study | Matthew Tan</title>
-<meta name="description" content="How I built BTO Explorer, an independent map that helps young couples in Singapore compare HDB towns and every HDB block using seven official open datasets.">
+<meta name="description" content="How I built BTO Explorer, an independent map that helps young couples in Singapore compare HDB towns and every HDB block, using ten official open datasets that update every month.">
 <meta property="og:title" content="BTO Explorer case study | Matthew Tan">
 <meta property="og:description" content="An independent map for young couples: HDB towns, 10,800+ blocks, BTO launch prices, MRT and food nearby.">
 <meta property="og:type" content="article">
@@ -36,15 +36,15 @@
       <div><dt>Role</dt><dd>Solo: research, data, design, build</dd></div>
       <div><dt>Timeline</dt><dd>2026</dd></div>
       <div><dt>Stack</dt><dd>Python, pandas, SQL, Shapely, Leaflet</dd></div>
-      <div><dt>Data</dt><dd>7 official datasets: HDB, URA, LTA, NEA</dd></div>
+      <div><dt>Data</dt><dd>10 official datasets, updated monthly</dd></div>
     </dl>
     <div class="actions">
       <a class="btn btn-primary" href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live site</a>
       <a class="btn" href="https://github.com/yushenn/bto-explorer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
     </div>
     <figure class="wide-shot reveal">
-      <img src="images/bto-block.jpg" alt="BTO Explorer zoomed into Woodlands, with house icons for each block and a popup for Blk 780E showing its completion year and resale prices" width="800" height="475" loading="lazy">
-      <figcaption>Every HDB block is a house icon. Click one for its completion year, size, lease left and recent resale prices.</figcaption>
+      <img src="images/bto-block.jpg" alt="BTO Explorer zoomed into Woodlands, with a popup for Blk 780E showing its completion year, nearest MRT station, what is within 1 km, and resale prices" width="800" height="475" loading="lazy">
+      <figcaption>Every HDB block is a house icon. Click one for its completion year, nearest MRT, what's within 1 km and recent resale prices.</figcaption>
     </figure>
   </section>
 
@@ -64,6 +64,7 @@
         <li><b>A town map ranked from most to least expensive,</b> by resale price per m² over the last 12 months.</li>
         <li><b>A budget mode:</b> pick a flat type and budget to see where a typical resale flat fits, and where only a recent BTO launch fits.</li>
         <li><b>Every HDB block on the map.</b> 10,802 blocks appear as house icons, coloured by age. Click one for its completion year, storeys, homes, lease left, flat types and resale prices from the last 24 months.</li>
+        <li><b>What's nearby:</b> each block shows its nearest MRT station and distance, plus the primary schools, secondary schools, CHAS clinics, parks and hawker centres within 1 km. Each of these can also be switched on as a map layer.</li>
         <li><b>A town panel</b> with BTO launch prices (including after grants) since FY2008, the gap between BTO and resale prices, MRT/LRT stations and hawker centres.</li>
       </ul>
     </div>
@@ -93,8 +94,8 @@
       </div>
       <div class="card">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span>
-        <h3>Reproducible pipeline</h3>
-        <p>Two Python scripts download all seven datasets from the data.gov.sg API and rebuild every file the site uses, so the data can be refreshed with two commands.</p>
+        <h3>Nearby, with NumPy</h3>
+        <p>For each of the 10,802 blocks, vectorised haversine distances find the nearest MRT station and count the schools, clinics, parks and hawker centres within 1 km. School postal codes are placed with OneMap's search, once, and cached.</p>
       </div>
     </div>
   </section>
@@ -136,11 +137,28 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">06</span><h2>What I'd do next</h2></div>
+    <div class="section-head"><span class="num">06</span><h2>From "next steps" to shipped</h2></div>
+    <p class="prose" style="margin-bottom:1rem"><span style="color:var(--muted)">When I first published this case study, I listed three next steps. I've since built all three.</span></p>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Planned</span><p>Show the distance from each block to its nearest MRT station.</p></div>
+      <div class="s"><span class="lbl">Shipped</span><p>Every block now shows its nearest MRT station and how far it is. The typical block is 670 m from a station, and 3,491 blocks are within 500 m. Distances are straight-line: real walking routes would need a routing service, so the site says so rather than guessing walking times.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Planned</span><p>Add layers for schools, clinics, parks and supermarkets.</p></div>
+      <div class="s"><span class="lbl">Shipped</span><p>Added 337 MOE schools, 1,193 CHAS clinics and 462 NParks parks, both as map layers and as counts within 1 km of every block. Supermarkets aren't included because no open dataset has their locations, only yearly totals.</p></div>
+    </div>
+    <div class="challenge">
+      <div class="p"><span class="lbl">Planned</span><p>Refresh the data every month with GitHub Actions.</p></div>
+      <div class="s"><span class="lbl">Shipped</span><p>A scheduled workflow now downloads all ten datasets on the 3rd of every month, rebuilds the site's files and publishes any changes. Its first test run failed: data.gov.sg blocks Python's default User-Agent. I found that by reproducing it locally, then fixed it and added retries. The next run worked and pulled in that month's new resale sales.</p></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head"><span class="num">07</span><h2>What I'd do next</h2></div>
     <ul class="next">
-      <li><b>Distance to MRT</b><span>Show the walking distance from each block to its nearest station.</span></li>
-      <li><b>More amenities</b><span>Add layers for schools, clinics, parks and supermarkets.</span></li>
-      <li><b>Automatic updates</b><span>Refresh the data every month with GitHub Actions.</span></li>
+      <li><b>Real walking routes</b><span>Use OneMap's routing service to show walking time to the nearest MRT.</span></li>
+      <li><b>Shortlist and compare</b><span>Let couples save a few blocks and compare them side by side.</span></li>
+      <li><b>Data tests</b><span>Automated checks that fail the monthly update if a dataset's format changes.</span></li>
     </ul>
   </section>
 

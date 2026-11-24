@@ -444,10 +444,11 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
           </div>
         </div>
         <ul>
-          <li>Combined seven official datasets (HDB, URA, LTA, NEA) into one map, with town price medians calculated in SQL using window functions</li>
+          <li>Combined ten official datasets (HDB, URA, LTA, NEA, MOE, MOH, NParks) into one map, with town price medians calculated in SQL using window functions</li>
           <li>Placed 10,802 HDB blocks on the map by joining two HDB datasets that share no ID, matching streets by their block numbers, and checked a sample against OneMap's official addresses</li>
-          <li>Click any block to see its completion year, storeys, lease left and resale prices from the last 24 months</li>
+          <li>Click any block to see its completion year, lease left, recent resale prices, nearest MRT station, and the schools, clinics, parks and hawker centres within 1 km</li>
           <li>A budget mode shows where a typical resale flat fits, and where only a recent BTO launch fits</li>
+          <li>Updates itself every month with a GitHub Actions workflow that downloads the latest data and republishes the site</li>
         </ul>
       </li>
           <li>Built a regression model that explains 91% of price variation, tested on 49,000 sales it had never seen</li>
