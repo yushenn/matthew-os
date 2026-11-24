@@ -433,17 +433,22 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
       </li>
       <li class="card wide reveal">
         <div>
-          <h3>HDB Resale Insights<span class="pill">New</span></h3>
+          <h3>BTO Explorer<span class="pill">New</span></h3>
           <span class="card-when">Personal, 2026</span>
-          <p>An analysis of every HDB resale transaction since 2017 (245,000+ sales) that finds what really drives prices, with an interactive dashboard and a fair-price estimator.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Regression</span><span class="tag">Chart.js</span></div>
+          <p>An interactive map that helps young couples compare HDB towns from most to least expensive, with past BTO launch prices, resale prices, MRT stations and hawker centres nearby.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Shapely</span><span class="tag">Leaflet</span><span class="tag">JavaScript</span></div>
           <div class="row-links">
-            <a href="https://yushenn.github.io/hdb-resale-insights/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open dashboard</a>
-            <a href="https://github.com/yushenn/hdb-resale-insights" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
+            <a href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open site</a>
+            <a href="https://github.com/yushenn/bto-explorer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
           </div>
         </div>
         <ul>
-          <li>Cleaned the government dataset with pandas and wrote the analysis in SQL, using window functions to calculate medians</li>
+          <li>Combined five official datasets (HDB, URA, LTA, NEA) into one map, with town price medians calculated in SQL using window functions</li>
+          <li>Grouped 613 MRT exits into 188 stations and placed stations and hawker centres inside each town with Shapely</li>
+          <li>A budget mode shows where a typical resale flat fits, and where only a recent BTO launch fits</li>
+          <li>Shows the BTO-vs-resale gap for each town, for example a 4-room in Woodlands: BTO from S$329k vs resale S$548k</li>
+        </ul>
+      </li>
           <li>Built a regression model that explains 91% of price variation, tested on 49,000 sales it had never seen</li>
           <li>Showed that the raw "high-floor premium" is mostly a location effect: like for like, each floor adds about 0.8%</li>
           <li>Turned the model into a fair-price estimator anyone can use in the browser</li>
