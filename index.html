@@ -435,7 +435,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
         <div>
           <h3>BTO Explorer<span class="pill">New</span></h3>
           <span class="card-when">Personal, 2026</span>
-          <p>An interactive map that helps young couples compare HDB towns from most to least expensive, with past BTO launch prices, resale prices, MRT stations and hawker centres nearby.</p>
+          <p>An independent map that helps young couples compare HDB towns from most to least expensive, then explore every HDB block: when it was completed and what flats there recently sold for, plus past BTO launch prices, MRT stations and hawker centres.</p>
           <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Shapely</span><span class="tag">Leaflet</span><span class="tag">JavaScript</span></div>
           <div class="row-links">
             <a href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open site</a>
@@ -443,10 +443,10 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
           </div>
         </div>
         <ul>
-          <li>Combined five official datasets (HDB, URA, LTA, NEA) into one map, with town price medians calculated in SQL using window functions</li>
-          <li>Grouped 613 MRT exits into 188 stations and placed stations and hawker centres inside each town with Shapely</li>
+          <li>Combined seven official datasets (HDB, URA, LTA, NEA) into one map, with town price medians calculated in SQL using window functions</li>
+          <li>Placed 10,802 HDB blocks on the map by joining two HDB datasets that share no ID, matching streets by their block numbers, and checked a sample against OneMap's official addresses</li>
+          <li>Click any block to see its completion year, storeys, lease left and resale prices from the last 24 months</li>
           <li>A budget mode shows where a typical resale flat fits, and where only a recent BTO launch fits</li>
-          <li>Shows the BTO-vs-resale gap for each town, for example a 4-room in Woodlands: BTO from S$329k vs resale S$548k</li>
         </ul>
       </li>
           <li>Built a regression model that explains 91% of price variation, tested on 49,000 sales it had never seen</li>
