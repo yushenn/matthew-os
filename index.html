@@ -20,6 +20,7 @@
   (function () {
     var d = document.documentElement; d.classList.add('js');
     try { var t = localStorage.getItem('mt-theme'); if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t); } catch (e) {}
+    if (!d.getAttribute('data-theme')) d.setAttribute('data-theme', 'dark'); // dark by default
   })();
 </script>
 <style>
@@ -284,6 +285,9 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
   .card,.panel,.glance div{box-shadow:none}
 }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hitech.css">
+<script src="hitech.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -318,6 +322,13 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
         <h1>Matthew <span class="grad">Tan</span></h1>
         <p class="role">ICT undergraduate, Singapore University of Social Sciences</p>
         <p class="lead">I combine a business and digital marketing background with hands-on web and database work, and I'm looking for a 2027 internship in the tech industry.</p>
+        <div class="term" aria-label="Terminal: whoami prints matthew_tan, ICT undergraduate at SUSS; status prints open to internships in 2027">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div data-line><span class="p">$</span> whoami</div>
+          <div data-line><span class="k">matthew_tan</span> · ict_undergraduate @ suss · singapore</div>
+          <div data-line><span class="p">$</span> status --internship</div>
+          <div data-line><span class="k">open</span> · internship_2027 · tech_industry</div>
+        </div>
         <div class="actions">
           <a class="btn btn-primary" href="mailto:matthewtan009@suss.edu.sg">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me</a>
