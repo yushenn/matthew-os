@@ -13,11 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}if(!d.getAttribute('data-theme'))d.setAttribute('data-theme','dark');})();</script>
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="case.css">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hitech.css">
-<script src="hitech.js" defer></script>
 </head>
 <body>
 <header class="nav">
@@ -29,7 +26,6 @@
 
 <main class="wrap">
   <section class="hero">
-    <div class="kicker">Case study · Personal project</div>
     <h1>SUSS Timetable Planner: <span class="grad">no more clashes</span></h1>
     <p class="lead">Course registration gives you a 300+ page PDF. I built a web app that reads it for you, checks every real session date for clashes, and suggests timetables that work.</p>
     <dl class="meta">
@@ -49,7 +45,7 @@
   </section>
 
   <section class="section narrow reveal">
-    <div class="section-head"><span class="num">01</span><h2>The problem</h2></div>
+    <div class="section-head"><h2>The problem</h2></div>
     <div class="prose">
       <p>Checking a timetable by hand is slow and easy to get wrong, because the weekly slot isn't the whole story:</p>
       <ul>
@@ -63,7 +59,7 @@
   </section>
 
   <section class="section narrow reveal">
-    <div class="section-head"><span class="num">02</span><h2>What I built</h2></div>
+    <div class="section-head"><h2>What I built</h2></div>
     <div class="prose">
       <ul>
         <li><b>Reads the official PDFs</b> (course schedule, curriculum plan, study plan, overseas info sheet) and recognises each one automatically.</li>
@@ -77,25 +73,21 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">03</span><h2>How it works</h2></div>
+    <div class="section-head"><h2>How it works</h2></div>
     <div class="cards">
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
         <h3>Reading tables from a PDF</h3>
         <p>A PDF has no real "table", just text placed at coordinates. The parser groups text into rows by vertical position, then matches the course code, class group, date, times and campus. Wrapped text like "WRITTEN EXAM" is attached to the nearest row.</p>
       </div>
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v18H3zM3 9h18M9 3v18"/></svg></span>
         <h3>Finding columns from the header</h3>
         <p>For the curriculum plan, the parser finds each column's position from the header rows, so cells that wrap over several lines (course names, prerequisites, remarks) end up in the right column.</p>
       </div>
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 8l3.5 8M16.5 8 13 16"/></svg></span>
         <h3>Searching for clash-free timetables</h3>
         <p>The suggestion engine is a depth-first search with pruning. It places one class group at a time and abandons a branch as soon as a group clashes with what's already placed, so it never wastes time on combinations that can't work.</p>
       </div>
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span>
         <h3>Checking clashes by date, not weekday</h3>
         <p>Each check uses a per-date map of occupied times plus blocked trip days. That's what catches an exam or a one-off session that a weekly view would miss.</p>
       </div>
@@ -103,7 +95,7 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">04</span><h2>Key decisions</h2></div>
+    <div class="section-head"><h2>Key decisions</h2></div>
     <div class="challenge">
       <div class="p"><span class="lbl">Decision</span><p>Parse the PDFs in the browser instead of on a server.</p></div>
       <div class="s"><span class="lbl">Why</span><p>Students' documents never leave their device, there's no server to run or pay for, and the whole app can be hosted for free on GitHub Pages.</p></div>
@@ -119,7 +111,7 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">05</span><h2>What I'd do next</h2></div>
+    <div class="section-head"><h2>What I'd do next</h2></div>
     <ul class="next">
       <li><b>Parser tests</b><span>Automated tests on sample PDFs so a format change is caught straight away.</span></li>
       <li><b>Share a plan</b><span>Send a plan to a friend with a link, to line up classes together.</span></li>

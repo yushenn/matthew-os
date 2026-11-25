@@ -13,11 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}if(!d.getAttribute('data-theme'))d.setAttribute('data-theme','dark');})();</script>
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('mt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="case.css">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hitech.css">
-<script src="hitech.js" defer></script>
 </head>
 <body>
 <header class="nav">
@@ -29,7 +26,6 @@
 
 <main class="wrap">
   <section class="hero">
-    <div class="kicker">Case study · Personal project</div>
     <h1>Repwise: a workout tracker that <span class="grad">coaches you</span></h1>
     <p class="lead">Most trackers just record what you lifted. I wanted one that also tells me what to do next session: how heavy to go, when to add weight, and whether I'm actually getting stronger.</p>
     <dl class="meta">
@@ -52,7 +48,7 @@
   </section>
 
   <section class="section narrow reveal">
-    <div class="section-head"><span class="num">01</span><h2>The problem</h2></div>
+    <div class="section-head"><h2>The problem</h2></div>
     <div class="prose">
       <p>I've trained for years, coached 100+ members as Head Trainer of NYP Urban Strength, and competed in powerlifting. The thing that makes people progress is simple: <b>progressive overload</b>, lifting a little more over time. But most people forget what they lifted last week, guess their weights, and can't tell whether they're improving.</p>
       <p>I wanted an app that remembers for you and applies the same rules a coach would. It also had to be quick to use between sets, work in a gym with bad signal, and not need an account.</p>
@@ -60,7 +56,7 @@
   </section>
 
   <section class="section narrow reveal">
-    <div class="section-head"><span class="num">02</span><h2>What I built</h2></div>
+    <div class="section-head"><h2>What I built</h2></div>
     <div class="prose">
       <ul>
         <li><b>Two-step setup</b> that picks a training split from your goal, experience and the days you can train, and queues up day 1.</li>
@@ -75,28 +71,24 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">03</span><h2>Key decisions</h2></div>
+    <div class="section-head"><h2>Key decisions</h2></div>
     <div class="cards">
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
         <h3>No framework, one file</h3>
         <p>The whole app is plain JavaScript in a single HTML file. All app data lives in one state object, and a single <code>render()</code> function redraws the screen from it.</p>
         <p class="tradeoff"><b>Trade-off:</b> no build step and it loads instantly, but I had to handle things a framework would do for me, like keeping scroll position after a redraw.</p>
       </div>
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
         <h3>Local-first, no account</h3>
         <p>Workouts are saved in the browser's local storage, and a service worker caches the app so it works offline. Users can export and import a JSON backup.</p>
         <p class="tradeoff"><b>Trade-off:</b> private and fast with no account. I later added optional sync on top, without changing that default.</p>
       </div>
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17l6-6 4 4 6-7M14 8h6v6"/></svg></span>
         <h3>Coaching rules as code</h3>
         <p>I turned the "double progression" method into logic: work in a rep range, and once every set reaches the top of it, add 2.5 kg (5 kg on big leg lifts) and drop back to the bottom of the range.</p>
         <p class="tradeoff"><b>Trade-off:</b> simple and predictable, but it doesn't adjust for a bad day or a deload yet.</p>
       </div>
       <div class="card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
         <h3>Hand-drawn SVG charts</h3>
         <p>Instead of a charting library, the bar chart, line charts and calendar are drawn as SVG directly from the data.</p>
         <p class="tradeoff"><b>Trade-off:</b> nothing extra to download and it works offline, but I wrote the scaling and labels myself.</p>
@@ -105,7 +97,7 @@
   </section>
 
   <section class="section narrow reveal">
-    <div class="section-head"><span class="num">04</span><h2>Comparing different sets fairly</h2></div>
+    <div class="section-head"><h2>Comparing different sets fairly</h2></div>
     <div class="prose">
       <p>To spot a personal record, the app needs to compare sets like <b>100 kg × 5</b> and <b>105 kg × 3</b>. Which is better? I used the Epley formula to estimate a one-rep max for every set, so any two sets can be compared on one number:</p>
     </div>
@@ -116,7 +108,7 @@
   </section>
 
   <section class="section narrow reveal">
-    <div class="section-head"><span class="num">05</span><h2>Adding a backend: accounts and sync</h2></div>
+    <div class="section-head"><h2>Adding a backend: accounts and sync</h2></div>
     <div class="prose">
       <p>To let workouts follow you between devices, I built a small API in <b>Python (Flask)</b> with a <b>MongoDB</b> database, deployed on Render. The app stays local-first: signing in is optional, and everything still works offline.</p>
     </div>
@@ -165,7 +157,7 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">06</span><h2>Challenges</h2></div>
+    <div class="section-head"><h2>Challenges</h2></div>
     <div class="challenge">
       <div class="p"><span class="lbl">Problem</span><p>After an update, people who had installed the app on their phone kept seeing the old version, because the service worker served the cached copy.</p></div>
       <div class="s"><span class="lbl">Solution</span><p>I version the cache name and delete old caches when the new service worker activates, so each release replaces the previous one cleanly.</p></div>
@@ -185,7 +177,7 @@
   </section>
 
   <section class="section reveal">
-    <div class="section-head"><span class="num">07</span><h2>What I'd do next</h2></div>
+    <div class="section-head"><h2>What I'd do next</h2></div>
     <ul class="next">
       <li><b>Password reset and account deletion</b><span>Email-based reset, and a way to delete your account and data.</span></li>
       <li><b>Front-end tests</b><span>Unit tests for the progression rules, PR detection, sync merging and date maths.</span></li>
