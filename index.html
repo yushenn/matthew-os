@@ -53,6 +53,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.5}
 header,main,footer{position:relative;z-index:1}
 a{color:var(--blue);text-underline-offset:3px}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
@@ -266,7 +267,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
   .foot{justify-content:center;text-align:center}
 }
 @media print{
-  .nav,.contact .actions,.phone,.theme-btn{display:none}
+  #field,.nav,.contact .actions,.phone,.theme-btn{display:none}
   .js .reveal{opacity:1;transform:none}
   .card,.panel,.glance div{box-shadow:none}
 }
@@ -274,6 +275,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<canvas id="field" aria-hidden="true"></canvas>
 
 <header class="nav">
   <div class="nav-inner">
@@ -566,6 +568,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
     const next = dark ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('mt-theme', next); } catch (e) {}
+    if (window.__fieldColors) window.__fieldColors();
   });
 
   // highlight the current section in the nav
@@ -600,6 +603,79 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
   }
 
+  // Interactive background: a field of needles that turn toward your cursor.
+  // Click (or tap) to send a pulse across the field.
+  (() => {
+    const cv = document.getElementById('field');
+    const ctx = cv.getContext('2d');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const SP = 36, RANGE = 200, REST = -Math.PI / 4;
+    let W, H, cells = [], pulses = [], col = {};
+    const m = { x: -9999, y: -9999 };
+
+    const hex = h => { h = h.trim().replace('#',''); return [0,2,4].map(i => parseInt(h.substr(i,2),16)); };
+    function readColors(){
+      const cs = getComputedStyle(document.documentElement);
+      col.base = hex(cs.getPropertyValue('--muted'));
+      col.hot  = hex(cs.getPropertyValue('--blue'));
+    }
+    window.__fieldColors = () => { readColors(); if (reduce.matches) frame(); };
+    function build(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cells = [];
+      for (let y = SP/2; y < H + SP; y += SP)
+        for (let x = SP/2; x < W + SP; x += SP)
+          cells.push({ x, y, a: REST, len: 5, boost: 0 });
+    }
+    const wrapAng = d => Math.atan2(Math.sin(d), Math.cos(d));
+
+    function frame(){
+      ctx.clearRect(0, 0, W, H);
+      pulses = pulses.filter(p => (p.r += 10) < p.max);
+      ctx.lineCap = 'round';
+      for (const c of cells){
+        const dx = m.x - c.x, dy = m.y - c.y, d = Math.hypot(dx, dy);
+        let near = d < RANGE ? Math.pow(1 - d / RANGE, 1.6) : 0;
+        let target = near > 0 ? Math.atan2(dy, dx) : REST;
+        let kick = 0;
+        for (const p of pulses){
+          const pd = Math.hypot(c.x - p.x, c.y - p.y), band = Math.abs(pd - p.r);
+          if (band < 46){
+            const k = (1 - band / 46) * (1 - p.r / p.max);
+            if (k > kick){ kick = k; target = Math.atan2(c.y - p.y, c.x - p.x); }
+          }
+        }
+        c.boost += (kick - c.boost) * 0.25;
+        c.a += wrapAng(target - c.a) * (near > 0 || kick > 0 ? 0.22 : 0.06);
+        const heat = Math.min(1, near + c.boost);
+        c.len += ((5 + 12 * heat) - c.len) * 0.2;
+        const r = Math.round(col.base[0] + (col.hot[0] - col.base[0]) * heat);
+        const g = Math.round(col.base[1] + (col.hot[1] - col.base[1]) * heat);
+        const b = Math.round(col.base[2] + (col.hot[2] - col.base[2]) * heat);
+        const hx = Math.cos(c.a) * c.len / 2, hy = Math.sin(c.a) * c.len / 2;
+        ctx.strokeStyle = `rgba(${r},${g},${b},${0.12 + 0.6 * heat})`;
+        ctx.lineWidth = 1.5 + heat * 1.1;
+        ctx.beginPath(); ctx.moveTo(c.x - hx, c.y - hy); ctx.lineTo(c.x + hx, c.y + hy); ctx.stroke();
+      }
+      if (!reduce.matches && !document.hidden) requestAnimationFrame(frame);
+    }
+    function start(){ readColors(); build(); frame(); }
+
+    addEventListener('pointermove', e => { m.x = e.clientX; m.y = e.clientY; }, { passive: true });
+    document.addEventListener('pointerleave', () => { m.x = m.y = -9999; });
+    addEventListener('pointerdown', e => {
+      if (reduce.matches || e.target.closest('a,button,iframe')) return;
+      pulses.push({ x: e.clientX, y: e.clientY, r: 0, max: Math.max(W, H) * 0.7 });
+    });
+    addEventListener('resize', () => { build(); if (reduce.matches) frame(); });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && !reduce.matches) frame(); });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readColors(); if (reduce.matches) frame(); });
+    reduce.addEventListener('change', () => { if (!reduce.matches) frame(); });
+    start();
+  })();
 </script>
 </body>
 </html>
