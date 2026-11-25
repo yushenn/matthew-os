@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Matthew Tan | ICT Undergraduate Portfolio</title>
-<meta name="description" content="Matthew Tan, ICT undergraduate at SUSS seeking a 2027 internship in the tech industry. Projects, experience and resume.">
+<meta name="description" content="Matthew Tan, ICT undergraduate at SUSS seeking a 2027 internship in product, business analysis or IT consulting. Projects, experience and resume.">
 <meta property="og:title" content="Matthew Tan | ICT Undergraduate Portfolio">
-<meta property="og:description" content="ICT undergraduate at SUSS seeking a 2027 internship. Projects, experience and resume.">
+<meta property="og:description" content="ICT undergraduate at SUSS seeking a 2027 internship in product, business analysis or IT consulting. Projects, experience and resume.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yushenn.github.io/matthew-os/">
 <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)">
@@ -152,11 +152,6 @@ ul{margin:0}
 .card.wide{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}
 .card.wide > div{display:flex;flex-direction:column;gap:.55rem}
 .card.wide ul{margin-top:.2rem}
-.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.5rem 0 .1rem}
-.stack div{padding:.6rem .75rem;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
-.stack dt{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
-.stack dd{margin:.15rem 0 0;font-size:.86rem;font-weight:600;line-height:1.35}
-@media (max-width:520px){.stack{grid-template-columns:1fr}}
 .featured .info{display:flex;flex-direction:column;gap:.6rem}
 .featured h3{font-size:clamp(1.6rem,3.2vw,2.1rem);font-weight:800;letter-spacing:-.02em}
 .phone{justify-self:center;width:280px;height:560px;border-radius:44px;padding:10px;background:#0E1012;box-shadow:0 0 0 2px #2A2D33,0 40px 80px -30px rgba(14,20,36,.55);position:relative}
@@ -173,6 +168,19 @@ ul{margin:0}
 .row-links a:hover{border-color:var(--blue)}
 .row-links a:first-child:hover{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
 .row-links svg{width:15px;height:15px}
+.row-links a:not(:first-child){background:none;border-color:transparent;color:var(--muted);padding-inline:.5rem}
+.row-links a:not(:first-child):hover{color:var(--ink);border-color:transparent}
+.also{margin-top:2.6rem}
+.also-title{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.4rem}
+.also ul{list-style:none;margin:0;padding:0}
+.also li{display:grid;grid-template-columns:15rem 1fr 15rem;gap:.4rem 1.6rem;align-items:baseline;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.also li:last-child{border-bottom:0}
+.also h4{margin:0;font-family:var(--body);font-size:1rem;font-weight:600}
+.also p{color:var(--muted);font-size:.95rem;max-width:62ch}
+.also-meta{color:var(--muted);font-size:.88rem;text-align:right}
+.also-meta a{color:var(--blue);font-weight:600;text-decoration:none}
+.also-meta a:hover{text-decoration:underline}
+@media (max-width:860px){.also li{grid-template-columns:1fr}.also-meta{text-align:left}}
 
 /* ---------- timeline (experience) ---------- */
 .timeline{list-style:none;margin:0;padding:0;position:relative}
@@ -295,7 +303,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
         <div class="status"><span class="dot" aria-hidden="true"></span>Open to internships in 2027</div>
         <h1>Matthew Tan</h1>
         <p class="role">ICT undergraduate, Singapore University of Social Sciences</p>
-        <p class="lead">I combine a business and digital marketing background with hands-on web and database work, and I'm looking for a 2027 internship in the tech industry.</p>
+        <p class="lead">I combine a business and digital marketing background with hands-on web and database work, and I'm looking for a 2027 internship in product, business analysis or IT consulting.</p>
         <div class="actions">
           <a class="btn btn-primary" href="mailto:matthewtan009@suss.edu.sg">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me</a>
@@ -314,8 +322,8 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
 
     <dl class="glance reveal" aria-label="At a glance">
       <div><dt>Studying</dt><dd>Year 2, BSc ICT</dd></div>
-      <div><dt>Looking for</dt><dd>2027 internship</dd></div>
-      <div><dt>Interested in</dt><dd>Tech industry</dd></div>
+      <div><dt>Roles</dt><dd>Product, business analysis</dd></div>
+      <div><dt>Available</dt><dd>2027 internship</dd></div>
       <div><dt>Based in</dt><dd>Singapore</dd></div>
     </dl>
 
@@ -337,7 +345,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
       <p>I'm a Year 2 Information and Communication Technology undergraduate at SUSS, with a diploma in business, digital marketing and e-commerce from Nanyang Polytechnic.</p>
       <p>I've analysed customer and campaign data in a digital marketing internship, served customers in high-volume retail, and built a web application and a relational database in coursework. Today I study alongside a part-time role on the AV crew at One Farrer Hotel.</p>
       <p>I use AI tools as an assistant in my schoolwork and when building my projects. They help me explore ideas, understand unfamiliar concepts and move faster, while I decide what to build, test every result and make sure I understand the code I ship.</p>
-      <p>I'm looking for an internship where I can learn from a real team and work on technology that people actually use.</p>
+      <p>I'm looking for an internship in product, business analysis or IT consulting, where I can learn from a real team and work on technology that people actually use.</p>
       <div class="strengths">
         <div><h3>Business meets tech</h3><p>A business diploma plus an ICT degree, so I can talk to both sides of a project.</p></div>
         <div><h3>User first</h3><p>Years of customer-facing work taught me to see a product from the side of the person using it.</p></div>
@@ -353,24 +361,17 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
         <div class="info">
           <h3>Repwise<span class="pill live">Live</span></h3>
           <span class="card-when">Personal, 2026 – Present</span>
-          <p>A mobile-first workout tracker I built to keep all my training data in one place.</p>
+          <p>A mobile-first workout tracker I built to keep all my training data in one place, then grew into a full product with accounts and cloud sync.</p>
           <ul>
-            <li>Log sets, reps and weights, with a rest timer between sets</li>
             <li>Builds a training plan from your goal and schedule, and tells you when to add weight or reps</li>
             <li>Progress charts, a 12-week consistency calendar and automatic personal-record detection</li>
-            <li>90+ exercises with form cues, training splits and a supplement guide</li>
-            <li>Works offline, and an animated welcome screen lets you sign in or create an account to sync workouts between phone and laptop through the live API</li>
+            <li>Works offline, with optional sign-in that syncs workouts between phone and laptop through a Flask and MongoDB API, covered by 24 tests on every push</li>
           </ul>
-          <dl class="stack">
-            <div><dt>Front end</dt><dd>JavaScript, installable PWA</dd></div>
-            <div><dt>Back end</dt><dd>Flask API, MongoDB</dd></div>
-            <div><dt>Quality</dt><dd>24 tests, run on every push</dd></div>
-          </dl>
           <div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">MongoDB</span><span class="tag">REST API</span><span class="tag">PWA</span></div>
           <div class="row-links">
-            <a href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
-            <a href="https://github.com/yushenn/Repwise" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
             <a href="repwise.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V6a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2M8 8h6M8 12h6"/></svg>Read case study</a>
+            <a href="https://yushenn.github.io/Repwise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Live app</a>
+            <a href="https://github.com/yushenn/Repwise" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>Code on GitHub</a>
           </div>
         </div>
         <div>
@@ -385,15 +386,14 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
           <p>A web app that reads the official SUSS timetable PDFs in the browser and checks a semester plan for clashes on every real session date, including exams and overseas trips.</p>
           <div class="tags"><span class="tag">JavaScript</span><span class="tag">PDF.js</span><span class="tag">Search algorithm</span><span class="tag">GitHub Pages</span></div>
           <div class="row-links">
-            <a href="https://yushenn.github.io/eCR/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live app</a>
-            <a href="https://github.com/yushenn/eCR" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
             <a href="timetable-planner.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V6a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2M8 8h6M8 12h6"/></svg>Read case study</a>
+            <a href="https://yushenn.github.io/eCR/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Live app</a>
+            <a href="https://github.com/yushenn/eCR" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>Code on GitHub</a>
           </div>
         </div>
         <ul>
           <li>Reads 300+ page timetable PDFs with PDF.js, matching course codes, class groups, dates and times by their position on the page</li>
           <li>Suggests clash-free timetables with a depth-first search, ranked by fewest campus days, with options such as keeping weekdays free</li>
-          <li>Compares backup plans side by side, tracks SUSS Core progress and prerequisites, and exports a plan to your calendar (.ics)</li>
           <li>Nothing is uploaded: PDFs are parsed and plans are saved in the browser</li>
         </ul>
       </li>
@@ -401,81 +401,32 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
         <div>
           <h3>BTO Explorer</h3>
           <span class="card-when">Personal, 2026</span>
-          <p>An independent map that helps young couples compare HDB towns from most to least expensive, then explore every HDB block: when it was completed and what flats there recently sold for, plus past BTO launch prices, MRT stations and hawker centres.</p>
+          <p>An independent map that helps young couples compare HDB towns from most to least expensive, then explore every HDB block: when it was completed and what flats there recently sold for.</p>
           <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Shapely</span><span class="tag">Leaflet</span><span class="tag">JavaScript</span></div>
           <div class="row-links">
-            <a href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open site</a>
-            <a href="https://github.com/yushenn/bto-explorer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
             <a href="bto-explorer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V6a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2M8 8h6M8 12h6"/></svg>Read case study</a>
+            <a href="https://yushenn.github.io/bto-explorer/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Live site</a>
+            <a href="https://github.com/yushenn/bto-explorer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>Code on GitHub</a>
           </div>
         </div>
         <ul>
           <li>Combined ten official datasets (HDB, URA, LTA, NEA, MOE, MOH, NParks) into one map, with town price medians calculated in SQL using window functions</li>
-          <li>Placed 10,802 HDB blocks on the map by joining two HDB datasets that share no ID, matching streets by their block numbers, and checked a sample against OneMap's official addresses</li>
-          <li>Click any block to see its completion year, lease left, recent resale prices, nearest MRT station, and the schools, clinics, parks and hawker centres within 1 km</li>
+          <li>Placed 10,802 HDB blocks on the map by joining two HDB datasets that share no ID, matching streets by their block numbers</li>
           <li>A budget mode shows where a typical resale flat fits, and where only a recent BTO launch fits</li>
-          <li>Updates itself every month with a GitHub Actions workflow that downloads the latest data and republishes the site</li>
         </ul>
-      </li>
-      <li class="card wide reveal">
-        <div>
-          <h3>Market Outlook Bot<span class="pill live">Live</span></h3>
-          <span class="card-when">Personal, 2026</span>
-          <p>A Python bot that analyses 16 stocks and ETFs every weekday and sends a technical outlook to my Telegram at 7:30am, Singapore time. It applies fixed rules to past prices, so it is a learning project, not financial advice.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">yfinance</span><span class="tag">Telegram Bot API</span><span class="tag">GitHub Actions</span></div>
-          <div class="row-links">
-            <a href="https://github.com/yushenn/market-outlook-bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
-          </div>
-        </div>
-        <ul>
-          <li>Works out each ticker's trend from its 50 and 200-day moving averages, with RSI, ATR and volume against the 50-day average</li>
-          <li>Finds support and resistance zones by clustering past swing highs and lows, then labels each ticker Buy zone, Watch, Hold or Avoid with an entry range, stop, target and reward-to-risk</li>
-          <li>Checks the wider market first (S&amp;P 500, VIX, US dollar and 10-year yield) and tests its own rule on each ticker's history: how often the price was higher 60 trading days later</li>
-          <li>Runs on a schedule with GitHub Actions, sends the summary through the Telegram Bot API, and saves an HTML report and a CSV log of every signal to the repo</li>
-        </ul>
-      </li>
-      <li class="card reveal">
-        <h3>Online Supermarket Web App</h3>
-        <span class="card-when">Web Application Development, SUSS, Jul – Oct 2026</span>
-        <p>A FairPrice-style grocery website built on an MVC structure.</p>
-        <ul>
-          <li>Guest, customer and admin views with category filters, a cart, stock-updating checkout, order history and reviews</li>
-          <li>Admin page for updating each product's price, stock and description, with input checks that block invalid entries</li>
-        </ul>
-        <span class="spacer"></span>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">MongoDB</span><span class="tag">Jinja</span><span class="tag">Bootstrap 5</span></div>
-      </li>
-      <li class="card reveal">
-        <h3>Lab Sample Tracking Database</h3>
-        <span class="card-when">Database Management Systems, SUSS, Jul – Oct 2026</span>
-        <p>A relational database for a virus-testing case, from data model to working queries.</p>
-        <ul>
-          <li>Turned the case into an ERD and normalised it to BCNF and 4NF using functional and multivalued dependencies</li>
-          <li>Built SQL Server tables with key constraints and wrote join and aggregate queries, such as average preprocessing steps per lab</li>
-          <li>Found and fixed an AND/OR logic error in a faulty query</li>
-        </ul>
-        <span class="spacer"></span>
-        <div class="tags"><span class="tag">SQL Server</span><span class="tag">ER modelling</span><span class="tag">Normalisation</span></div>
-      </li>
-      <li class="card reveal">
-        <h3>Student FAQ Chatbot</h3>
-        <span class="card-when">SUSS Open Source Hackathon, 2026</span>
-        <p>A Telegram chatbot, built with a team of four, that answers students' common questions about school matters.</p>
-        <span class="spacer"></span>
-        <div class="tags"><span class="tag">Telegram bot</span><span class="tag">Teamwork</span></div>
-      </li>
-      <li class="card reveal">
-        <h3>Portfolio Website</h3>
-        <span class="card-when">Personal, 2026</span>
-        <p>This site. Hand-written HTML, CSS and JavaScript with no framework: light and dark themes, a case study for each main project, and a layout that works on phones.</p>
-        <span class="spacer"></span>
-        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">GitHub Pages</span></div>
-        <div class="row-links">
-          <a href="https://yushenn.github.io/matthew-os" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>Open live site</a>
-          <a href="https://github.com/yushenn/matthew-os" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>View code</a>
-        </div>
       </li>
     </ul>
+
+    <div class="also reveal">
+      <h3 class="also-title">Also built</h3>
+      <ul>
+        <li><h4>Market Outlook Bot<span class="pill live">Live</span></h4><p>A Python bot that analyses 16 stocks and ETFs every weekday and sends a technical outlook to my Telegram at 7:30am, running on GitHub Actions. A learning project, not financial advice.</p><span class="also-meta">Personal, 2026 · <a href="https://github.com/yushenn/market-outlook-bot" target="_blank" rel="noopener">Code on GitHub</a></span></li>
+        <li><h4>Online Supermarket Web App</h4><p>A FairPrice-style grocery site in Flask and MongoDB with guest, customer and admin views, a stock-updating checkout and input checks on the admin page.</p><span class="also-meta">Coursework, SUSS, 2026</span></li>
+        <li><h4>Lab Sample Tracking Database</h4><p>A SQL Server database for a virus-testing case: an ERD normalised to BCNF and 4NF, join and aggregate queries, and a fixed AND/OR logic error.</p><span class="also-meta">Coursework, SUSS, 2026</span></li>
+        <li><h4>Student FAQ Chatbot</h4><p>A Telegram chatbot, built with a team of four, that answers students' common questions about school matters.</p><span class="also-meta">SUSS Open Source Hackathon, 2026</span></li>
+        <li><h4>Portfolio Website</h4><p>This site. Hand-written HTML, CSS and JavaScript with light and dark themes and a case study for each main project.</p><span class="also-meta">Personal, 2026 · <a href="https://github.com/yushenn/matthew-os" target="_blank" rel="noopener">Code on GitHub</a></span></li>
+      </ul>
+    </div>
   </section>
 
   <section class="section wrap" id="experience">
@@ -563,7 +514,7 @@ footer{padding:2.6rem 0 calc(2.8rem + env(safe-area-inset-bottom,0px));color:var
     <div class="contact reveal">
       <div>
         <h2>Get in touch</h2>
-        <p>I'm looking for a 2027 internship. Download my one-page resume or send me an email.</p>
+        <p>Download my one-page resume or send me an email.</p>
       </div>
       <div class="actions">
         <a class="btn btn-primary" href="Tan_Yu_Shen_Matthew_Resume_v2.pdf" target="_blank" rel="noopener">
